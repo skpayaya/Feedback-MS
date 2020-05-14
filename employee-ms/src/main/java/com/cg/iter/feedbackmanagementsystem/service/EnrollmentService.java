@@ -25,6 +25,13 @@ public class EnrollmentService implements IEnrollmentService{
 	@Autowired
 	private StudentDao studentDao;
 	
+	/**
+	 * used to enroll student to a training program
+	 * takes id of student and program id to enroll in
+	 * checks if already enrolled
+	 * if already enrolled,return false
+	 * if not enrolled,enrolls the student and return true
+	 */
 	@Override
 	public boolean addEnrollment(String studentId,String programId) {
 

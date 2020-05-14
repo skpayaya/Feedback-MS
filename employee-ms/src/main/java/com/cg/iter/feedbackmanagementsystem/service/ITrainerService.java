@@ -7,13 +7,10 @@ import com.cg.iter.feedbackmanagementsystem.dto.Trainer;
 public interface ITrainerService {
 
 
-	Trainer addtrainer(Trainer trainer);
-
 	List<Trainer> getAlltrainers();
 
+	String updatetrainer(Trainer trainer);
 
 	Trainer getTrainerById(String id);
-
-	String updatetrainer(Trainer trainer);
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.iter.feedbackmanagementsystem.dao.TrainerDao;
 import com.cg.iter.feedbackmanagementsystem.dto.Trainer;
+import com.cg.iter.feedbackmanagementsystem.validator.Validators;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,15 +15,20 @@ public class TrainerService implements ITrainerService{
 	
 	@Autowired
 	private TrainerDao trainerDao;
-	
+	/**
+	 * returns the list of trainers in database
+	 */
 	@Override
 	public List<Trainer> getAlltrainers() {
 		return trainerDao.findAll();
 	}
-	@Override
-	public Trainer addtrainer(Trainer trainer) {
-		return trainerDao.save(trainer);
-	}
+
+	/**
+	 * update the trainer
+	 * checks if the trainer is present in database
+	 * if present updates the trainer,return true
+	 * otherwise return false
+	 */
 	@Override
 	public String updatetrainer(Trainer trainer) {
 		
@@ -34,6 +40,10 @@ public class TrainerService implements ITrainerService{
 		return "Updated trainer";
 		
 	}
+	/**
+	 * return the trainer by id
+	 * 
+	 */
 	@Override
 	public Trainer getTrainerById(String id) {
 		return trainerDao.getOne(id);

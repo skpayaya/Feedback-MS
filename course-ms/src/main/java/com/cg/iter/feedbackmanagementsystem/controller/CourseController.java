@@ -45,10 +45,7 @@ public class CourseController {
 	//	Training program Maintenance
 	@PostMapping("/trainingprograms")
 	public String addTrainingProgram(@RequestBody TrainingProgram trainingProgram) {
-		if(trainingProgramService.create(trainingProgram)) {
-			return "Training Program added";
-		}
-		return "Training Program already exists";
+		return trainingProgramService.create(trainingProgram);
 	}
 	@DeleteMapping("/trainingprograms/{id}")
 	public String deleteTrainingProgram(@PathVariable String id) {
@@ -62,6 +59,7 @@ public class CourseController {
 		return trainingProgramService.getAllTrainingPrograms();
 
 	}
+
 	@PutMapping("/trainingprograms")
 	public String updateTrainingProgram(@RequestBody TrainingProgram trainingProgram) {
 		if(trainingProgramService.update(trainingProgram)) {

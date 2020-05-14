@@ -15,36 +15,29 @@ public class CourseService implements ICourseService {
 	@Autowired
 	private CourseDao courseDao;
 
-	@Override
-	public Course addCourse(Course course) {
-		return courseDao.save(course);
-
-	}
-	@Override
-	public void deleteCourse(String id) {
-		courseDao.deleteById(id);
-
-	}
+	/**
+	 * return all the course details
+	 */
 	@Override
 	public List<Course> getAllCourse() {
 		return courseDao.findAll();
 
 	}
-	@Override
-	public Course getCourseDetails(String id) {
-		return courseDao.getOne(id);
-
-	}
+	/**
+	 * used to update course
+	 */
 	@Override
 	public String updateCourse(Course course) {
 		Optional<Course> findById = courseDao.findById(course.getCourseId());
 
-		
+		if(course.getNoOfDays()<1) {
+			return "Invalid no of days";
+		}
 		if(findById.isPresent()) {
 			courseDao.save(course);
-			return "Updated";
+			return "Updated course";
 		}
-		return "Not Updated";
+		return "Not Updated course";
 		
 	}
 

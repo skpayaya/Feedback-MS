@@ -10,7 +10,7 @@ public interface ITrainingProgramService {
 
 	List<TrainingProgram> getAllTrainingPrograms();
 
-	boolean create(TrainingProgram trainingProgram);
+	String create(TrainingProgram trainingProgram);
 
 	boolean remove(String id);
 

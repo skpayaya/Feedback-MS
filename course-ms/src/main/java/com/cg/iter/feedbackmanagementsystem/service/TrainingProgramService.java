@@ -19,6 +19,12 @@ public class TrainingProgramService implements ITrainingProgramService {
 		return trainingProgramDao.findAll();
 	}
 
+	/**
+	 * update the training program
+	 * checks if the training program is present
+	 * if present updates the training program,return true
+	 * otherwise return false
+	 */
 	@Override
 	public boolean update(TrainingProgram trainingProgram) {
 		Optional<TrainingProgram> findById = trainingProgramDao.findById(trainingProgram.getId());
@@ -31,17 +37,30 @@ public class TrainingProgramService implements ITrainingProgramService {
 
 	}
 
+	/**
+	 * adds a new training program
+	 * checks if the training program with same ID is present
+	 * if not present,adds the training program,return true
+	 * otherwise returns false
+	 */
 	@Override
-	public boolean create(TrainingProgram trainingProgram) {
+	public String create(TrainingProgram trainingProgram) {
 		Optional<TrainingProgram> findById = trainingProgramDao.findById(trainingProgram.getId());
 		if(findById.isEmpty()) {
 			trainingProgramDao.save(trainingProgram);
-			return true;
+			return "training program added";
 		}
-		return false;
+		return "training program not added";
 
 	}
 
+	/**
+	 * remove a training program
+	 * takes the id of training program as input 
+	 * checks if the training program is present
+	 * if present removes the training program,return true
+	 * otherwise return false
+	 */
 	@Override
 	public boolean remove(String id) {
 		Optional<TrainingProgram> findById = trainingProgramDao.findById(id);

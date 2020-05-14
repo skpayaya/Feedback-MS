@@ -14,6 +14,9 @@ public class StudentService implements IStudentService {
 	private StudentDao studentDao;
 
 
+	/**
+	 * returns the list of all the students
+	 */
 	@Override
 	public List<Student> getAllStudents() {
 		return studentDao.findAll();

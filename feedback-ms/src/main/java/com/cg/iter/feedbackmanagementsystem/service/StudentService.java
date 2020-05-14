@@ -30,14 +30,28 @@ public class StudentService implements IStudentService {
 	public List<Student> getAllStudents() {
 		return studentDao.findAll();
 	}
+
+	/**
+	 * adds feedback 
+	 * validates rating
+	 * if student already entered feedback,return false
+	 * if student not enrolled,return false
+	 * otherwise enter feedback
+	 */
 	@Override
 	public boolean addFeedback(Feedback feedback) throws InvalidFeedbackException {
 		String studentId=feedback.getStudent().getId();
 		String tpId=feedback.getTrainingProgram().getId();
 
+		//if feedback already present,return false
+		List<Feedback> findAll = feedbackDao.findAll();
+		for (Feedback feedback2 : findAll) {
+			if(feedback2.getTrainingProgram().getId().equals(tpId) && feedback2.getStudent().getId().equals(studentId)) {
+				return false;
+			}
+		}
 		//validate rating
 		FeedbackValidators.validateRating(feedback);
-		
 		//if not enrolled,student can't enter feedback
 		boolean enrolled=false;
 		List<TrainingProgram> enrolledPrograms = findEnrolledPrograms(studentId);
@@ -46,20 +60,16 @@ public class StudentService implements IStudentService {
 				enrolled=true;
 			}
 		}
-
 		if(!enrolled)
 			return false;
-		//if feedback already present,return false
-		List<Feedback> findAll = feedbackDao.findAll();
-		for (Feedback feedback2 : findAll) {
-			if(feedback2.getTrainingProgram().getId().equals(tpId) && feedback2.getStudent().getId().equals(studentId)) {
-				return false;
-			}
-		}
+
 		feedbackDao.save(feedback);
 		return true;
 	}
 
+	/**
+	 * finds the enrolled programs using student ID
+	 */
 	public List<TrainingProgram> findEnrolledPrograms(String studentId) {
 		List<Enrollment> findAll = enrollmentDao.findAll();
 		List<TrainingProgram> enrolledPrograms = new ArrayList<>();
