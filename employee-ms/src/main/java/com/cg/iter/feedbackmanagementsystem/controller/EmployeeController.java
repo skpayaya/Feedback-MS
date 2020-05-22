@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.iter.feedbackmanagementsystem.dto.Student;
 import com.cg.iter.feedbackmanagementsystem.dto.Trainer;
 import com.cg.iter.feedbackmanagementsystem.dto.TrainingProgram;
+import com.cg.iter.feedbackmanagementsystem.dto.User;
 import com.cg.iter.feedbackmanagementsystem.service.IEnrollmentService;
 import com.cg.iter.feedbackmanagementsystem.service.IStudentService;
 import com.cg.iter.feedbackmanagementsystem.service.ITrainerService;
@@ -51,7 +51,7 @@ public class EmployeeController {
 		return trainerService.updatetrainer(trainer);
 	}
 	@PostMapping("/enroll/{studentId}")
-	public String enrollParticipant(@RequestBody TrainingProgram trainingProgram,@PathVariable String studentId) {
+	public String enrollParticipant(@RequestBody TrainingProgram trainingProgram,@PathVariable int studentId) {
 
 		if(enrollmentService.addEnrollment(studentId, trainingProgram.getId())) {
 			return "Succesfully enrolled";
@@ -60,7 +60,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/studentlist")
-	public List<Student> getAllStudents() {
+	public List<User> getAllStudents() {
 		return studentService.getAllStudents();
 	}
 

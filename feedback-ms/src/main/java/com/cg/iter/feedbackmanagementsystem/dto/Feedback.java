@@ -13,7 +13,7 @@ public class Feedback {
 	private int id;
 	
 	@ManyToOne
-	private Student student;
+	private User user;
 	
 	
 	@ManyToOne
@@ -28,17 +28,7 @@ public class Feedback {
 	private String criteriaThird;
 	
 
-	public Feedback(Student student, TrainingProgram trainingProgram, String criteriaFifth, String criteriaFirst,
-			String criteriaFourth, String criteriaSecond, String criteriaThird) {
-		super();
-		this.student = student;
-		this.trainingProgram = trainingProgram;
-		this.criteriaFifth = criteriaFifth;
-		this.criteriaFirst = criteriaFirst;
-		this.criteriaFourth = criteriaFourth;
-		this.criteriaSecond = criteriaSecond;
-		this.criteriaThird = criteriaThird;
-	}
+
 
 	public Feedback() {
 		super();
@@ -68,10 +58,6 @@ public class Feedback {
 		return id;
 	}
 
-
-	public Student getStudent() {
-		return student;
-	}
 
 
 	public TrainingProgram getTrainingProgram() {
@@ -109,10 +95,25 @@ public class Feedback {
 	}
 
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public Feedback(User user, TrainingProgram trainingProgram, String criteriaFifth, String criteriaFirst,
+			String criteriaFourth, String criteriaSecond, String criteriaThird) {
+		super();
+		this.user = user;
+		this.trainingProgram = trainingProgram;
+		this.criteriaFifth = criteriaFifth;
+		this.criteriaFirst = criteriaFirst;
+		this.criteriaFourth = criteriaFourth;
+		this.criteriaSecond = criteriaSecond;
+		this.criteriaThird = criteriaThird;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public void setTrainingProgram(TrainingProgram trainingProgram) {
 		this.trainingProgram = trainingProgram;

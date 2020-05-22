@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.cg.iter.feedbackmanagementsystem.dto.Enrollment;
 
 @Repository
-public interface EnrollmentDao extends JpaRepository<Enrollment, String> {
+public interface EnrollmentDao extends JpaRepository<Enrollment, Integer> {
 
 }

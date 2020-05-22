@@ -14,7 +14,7 @@ public class Enrollment {
 	private int id;
 	
 	@ManyToOne
-	private Student student;
+	private User user;
 	
 	@ManyToOne
 	private TrainingProgram trainingProgram;
@@ -31,19 +31,21 @@ public class Enrollment {
 		this.id = id;
 	}
 
-	public Enrollment(Student student, TrainingProgram trainingProgram) {
+	public Enrollment(User user, TrainingProgram trainingProgram) {
 		super();
-		this.student = student;
+		this.user = user;
 		this.trainingProgram = trainingProgram;
 	}
 
 
-	public Student getStudent() {
-		return student;
+
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public TrainingProgram getTrainingProgram() {

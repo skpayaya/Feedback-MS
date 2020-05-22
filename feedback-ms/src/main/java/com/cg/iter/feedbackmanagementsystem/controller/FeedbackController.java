@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.iter.feedbackmanagementsystem.dto.Feedback;
-import com.cg.iter.feedbackmanagementsystem.dto.Student;
+import com.cg.iter.feedbackmanagementsystem.dto.TrainingProgram;
+import com.cg.iter.feedbackmanagementsystem.dto.User;
 import com.cg.iter.feedbackmanagementsystem.exception.InvalidFeedbackException;
 import com.cg.iter.feedbackmanagementsystem.service.IFeedbackService;
 import com.cg.iter.feedbackmanagementsystem.service.IStudentService;
@@ -30,7 +31,7 @@ public class FeedbackController {
 	private IStudentService studentService;
 //	View Feedback Report
 	@GetMapping("/defaulters/{id}")
-	public List<Student> viewDefaultList(@PathVariable String id) throws InvalidFeedbackException {
+	public List<User> viewDefaultList(@PathVariable String id) throws InvalidFeedbackException {
 		return feedbackService.viewDefaulterList(id);
 		
 	}
@@ -46,7 +47,12 @@ public class FeedbackController {
 		studentService.addFeedback(feedback);
 		return "Feedback added";
 	}
-	
+	//find programs student hasn't enter feedback for
+	@GetMapping("/findprogramsleft/{id}")
+	public List<TrainingProgram> getProgramsForFeedback(@PathVariable int id){
+		return feedbackService.getProgramsForFeedback(id);
+		
+	}
 	@ExceptionHandler(InvalidFeedbackException.class)
 	public String handleException(InvalidFeedbackException e) {
 		return e.getMessage();

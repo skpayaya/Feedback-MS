@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.iter.feedbackmanagementsystem.dao.EnrollmentDao;
-import com.cg.iter.feedbackmanagementsystem.dao.StudentDao;
 import com.cg.iter.feedbackmanagementsystem.dao.TrainingProgramDao;
+import com.cg.iter.feedbackmanagementsystem.dao.UserDao;
 import com.cg.iter.feedbackmanagementsystem.dto.Enrollment;
-import com.cg.iter.feedbackmanagementsystem.dto.Student;
 import com.cg.iter.feedbackmanagementsystem.dto.TrainingProgram;
+import com.cg.iter.feedbackmanagementsystem.dto.User;
 
 @Service
 public class EnrollmentService implements IEnrollmentService{
@@ -23,29 +23,29 @@ public class EnrollmentService implements IEnrollmentService{
 	private TrainingProgramDao trainingProgramDao;
 	
 	@Autowired
-	private StudentDao studentDao;
+	private UserDao userDao;
 	
 	/**
-	 * used to enroll student to a training program
-	 * takes id of student and program id to enroll in
+	 * used to enroll user to a training program
+	 * takes id of user and program id to enroll in
 	 * checks if already enrolled
 	 * if already enrolled,return false
-	 * if not enrolled,enrolls the student and return true
+	 * if not enrolled,enrolls the user and return true
 	 */
 	@Override
-	public boolean addEnrollment(String studentId,String programId) {
+	public boolean addEnrollment(int userId,String programId) {
 
 		List<Enrollment> findAll = enrollmentDao.findAll();
 		for (Enrollment enrollment : findAll) {
-			if(enrollment.getStudent().getId().equals(studentId) && enrollment.getTrainingProgram().getId().equals(programId)) {
+			if(enrollment.getUser().getId()==(userId) && enrollment.getTrainingProgram().getId().equals(programId)) {
 				return false;
 			}
 			
 		}
 		TrainingProgram trainingProgram = trainingProgramDao.getOne(programId);
-		Student student = studentDao.getOne(studentId);
+		User user = userDao.getOne(userId);
 		
-		enrollmentDao.save(new Enrollment(student,trainingProgram));
+		enrollmentDao.save(new Enrollment(user,trainingProgram));
 		return true;
 		
 		

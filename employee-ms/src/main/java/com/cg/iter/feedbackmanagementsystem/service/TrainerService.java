@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.cg.iter.feedbackmanagementsystem.dao.TrainerDao;
 import com.cg.iter.feedbackmanagementsystem.dto.Trainer;
-import com.cg.iter.feedbackmanagementsystem.validator.Validators;
 
 import java.util.List;
 import java.util.Optional;
